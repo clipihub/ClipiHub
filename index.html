@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,7 +178,7 @@
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: -2;
-            opacity: 0.25;
+            opacity: 0.15; /* Reduced from 0.25 to 0.15 for better performance */
         }
         /* Additional overlay for better readability */
         
@@ -1404,8 +1405,8 @@
             <div class="showreel-label">🎬 Featured Showreels — use arrows to browse 🎬</div>
             <div class="video-frame">
                 <div class="video-wrapper">
-                    <video id="showreelVideo" controls preload="metadata" poster="apleui.jpg" src="IMG_2665.mp4">
-                        <source src="IMG_2665.MP4" type="video/mp4">
+                    <video id="showreelVideo" controls preload="metadata" poster="apleui.jpg">
+                        <source src="IMG_2665.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="title-panel">
@@ -1416,16 +1417,16 @@
             <div class="nav-arrow arrow-right" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
         </div>
 
-        <!-- RESPONSIVE VERTICAL REELS (9:16) - AUTOPLAY, MUTED, LOOP, NO POSTER -->
+        <!-- RESPONSIVE VERTICAL REELS (9:16) - AUTOPLAY, MUTED, LOOP, preload="metadata" for performance -->
         <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; align-items: stretch; margin: 40px auto; max-width: 1200px;">
 
             <!-- REEL 1: TALKING HEAD -->
             <div style="flex: 1 1 260px; min-width: 200px; max-width: 280px; background: rgba(10, 10, 20, 0.7); border-radius: 24px; overflow: hidden; border: 1px solid rgba(139, 63, 209, 0.4); backdrop-filter: blur(3px); transition: transform 0.25s;">
                 <div style="aspect-ratio: 9 / 16; background: #000;">
-                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <source src="IMG_2741.mp4" type="video/mp4">
-                Your browser does not support video.
-            </video>
+                    <video preload="metadata" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <source src="IMG_2741.mp4" type="video/mp4">
+                        Your browser does not support video.
+                    </video>
                 </div>
                 <div style="padding: 16px;">
                     <h3 style="color: #8B3FD1; font-size: 1.25rem; margin-bottom: 8px;"><i class="fas fa-microphone-alt"></i> Talking Head Edits</h3>
@@ -1436,9 +1437,9 @@
             <!-- REEL 2: DOCTOR CONSULTATION-->
             <div style="flex: 1 1 260px; min-width: 200px; max-width: 280px; background: rgba(10, 10, 20, 0.7); border-radius: 24px; overflow: hidden; border: 1px solid rgba(139, 63, 209, 0.4); backdrop-filter: blur(3px);">
                 <div style="aspect-ratio: 9 / 16; background: #000;">
-                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <source src="IMG_3540.mp4" type="video/mp4">
-            </video>
+                    <video preload="metadata" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <source src="IMG_3540.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <div style="padding: 16px;">
                     <h3 style="color: #8B3FD1; font-size: 1.25rem; margin-bottom: 8px;"><i class="fas fa-home"></i> Doctor Consultation</h3>
@@ -1449,15 +1450,17 @@
             <!-- REEL 3: ADVERTISEMENTS -->
             <div style="flex: 1 1 260px; min-width: 200px; max-width: 280px; background: rgba(10, 10, 20, 0.7); border-radius: 24px; overflow: hidden; border: 1px solid rgba(139, 63, 209, 0.4); backdrop-filter: blur(3px);">
                 <div style="aspect-ratio: 9 / 16; background: #000;">
-                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <source src="IMG_2711.mp4" type="video/mp4">
-            </video>
+                    <video preload="metadata" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <source src="IMG_2711.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <div style="padding: 16px;">
                     <h3 style="color: #8B3FD1; font-size: 1.25rem; margin-bottom: 8px;"><i class="fas fa-podcast"></i> Advertisements</h3>
                     <p style="color: #c0c0d0; font-size: 0.85rem; line-height: 1.4;">Multi‑cam sync, audio cleanup, dynamic lower‑thirds.</p>
                 </div>
             </div>
+        </div>
+
         <div class="portfolio-grid">
             <div class="portfolio-item">
                 <div class="portfolio-img"><img src="wokr.jpg" loading="lazy" alt="Logo Design"></div>
@@ -1479,7 +1482,7 @@
             </div>
             
         </div>
-    </div></section>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -1564,7 +1567,7 @@
                 { title: "Apple Style UI Editing", src: "IMG_2665.mp4" },
                 { title: "SaaS Apple UI Animation", src: "BeenOn.mp4" }
             ];
-            let currentIndex = 0; // fixed: start at 0
+            let currentIndex = 0;
             const videoPlayer = document.getElementById('showreelVideo');
             const titleElement = document.getElementById('videoTitle');
             const prevBtn = document.getElementById('prevBtn');
