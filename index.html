@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Clipi Hub · Premium Creative Studio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("NRGnCyrIbZXVTWDwq");
+       })();
+    </script>
+
+    <style>
+        /* ===== GLOBAL RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            min-height: 200vh;
+        }
+
+        /* ===== PARALLAX BACKGROUNDS ===== */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            will-change: transform;
+        }
+        .parallax-bg .layer {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+        .parallax-bg .layer-1 {
+            width: 600px;
+            height: 600px;
+            top: -5%;
+            left: -5%;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.15), rgba(59, 130, 246, 0.05));
+            animation: floatBlob 25s ease-in-out infinite alternate;
+        }
+        .parallax-bg .layer-2 {
+            width: 500px;
+            height: 500px;
+            bottom: 10%;
+            right: -5%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.03));
+            animation: floatBlob 30s ease-in-out infinite alternate-reverse;
+        }
+        .parallax-bg .layer-3 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 45%;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.10), transparent);
+            animation: floatBlob 20s ease-in-out infinite alternate;
+        }
+        .parallax-bg .layer-4 {
+            width: 350px;
+            height: 350px;
+            bottom: 30%;
+            left: 8%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent);
+            animation: floatBlob 35s ease-in-out infinite alternate-reverse;
+        }
+        .parallax-bg .layer-5 {
+            width: 450px;
+            height: 450px;
+            top: 55%;
+            right: 10%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.06), transparent);
+            animation: floatBlob 28s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.9); }
+            100% { transform: translate(20px, 20px) scale(1.05); }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img, video { max-width: 100%; display: block; }
+
+        :root {
+            --text: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-light: #86868b;
+            --accent: #0071e3;
+            --accent-glow: rgba(0, 113, 227, 0.25);
+            --radius: 24px;
+            --radius-sm: 14px;
+            --transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0 48px;
+            height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.02);
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #1d1d1f 40%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo span {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .main-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .main-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+        }
+        .main-nav a:hover { color: var(--text); }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        .main-nav a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 2.5px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 100px 48px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section-title .highlight {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-sub {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 56px;
+            font-weight: 400;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 80px;
+            min-height: calc(100vh - 76px);
+            padding: 76px 0 0 0;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+        .hero-content .badge {
+            display: inline-block;
+            background: rgba(0, 113, 227, 0.08);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            padding: 6px 18px;
+            border-radius: 40px;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 113, 227, 0.1);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .hero-content h1 {
+            font-size: 60px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 8px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.2s;
+        }
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--accent), #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-content h2 {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            min-height: 44px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.4s;
+        }
+        .hero-content h2 .typed-text {
+            background: linear-gradient(135deg, var(--accent), #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            max-width: 480px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.6s;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        .btn-primary, .btn-outline {
+            padding: 16px 38px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(0, 113, 227, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 40px rgba(0, 113, 227, 0.4); }
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            color: var(--text);
+            border: 1.5px solid rgba(0, 0, 0, 0.08);
+        }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.8); transform: translateY(-3px); border-color: var(--accent); }
+        
+        .hero-social {
+            display: flex;
+            gap: 12px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            animation-delay: 1s;
+        }
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            font-size: 17px;
+            cursor: pointer;
+        }
+        .social-icon:hover { background: linear-gradient(135deg, var(--accent), #6366f1); color: #fff; transform: translateY(-3px) scale(1.1); }
+
+        /* ===== FINAL AVATAR ON TOP LAYOUT ===== */
+        .hero-image {
+            flex: 0 0 420px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: fadeInRight 1.2s ease forwards;
+            opacity: 0;
+            animation-delay: 0.6s;
+        }
+        
+        .hero-frame {
+            width: 420px;
+            height: 540px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            overflow: visible; /* Crucial: avatar ko cut hone se rokta hai */
+        }
+        
+        /* THE GLASS TEXT BOX (MOVED BEHIND THE AVATAR) */
+        .brand-core {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 80%;
+            padding: 2.5rem 1rem;
+            position: relative;
+            z-index: 0; /* AVATAR IS ABOVE THIS */
+            
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px) saturate(1.8);
+            -webkit-backdrop-filter: blur(12px) saturate(1.8);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            
+            animation: premiumFloat 6s ease-in-out infinite alternate;
+            /* Glass ko thoda sa right shift kiya taaki avatar left se dikhe */
+            margin-left: 60px; 
+        }
+
+        @keyframes premiumFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-15px); }
+        }
+
+        /* THE DIRECT IMG TAG FOR AVATAR (ON TOP, SHIFTED MORE LEFT) */
+        .avatar-img {
+            position: absolute;
+            top: 50%; 
+            left: 5%; /* 👈 Isko aur left kar diya hai */
+            transform: translate(-50%, -50%) rotate(-8deg) scale(0.75); /* Size thoda sa chhota kiya */
+            width: 90%;
+            height: auto;
+            z-index: 1; /* UPAR GLASS KE */
+            pointer-events: none;
+            animation: premiumAvatarTilt 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes premiumAvatarTilt {
+            0% { transform: translate(-50%, -50%) rotate(-10deg) scale(0.75); }
+            100% { transform: translate(-45%, -55%) rotate(-5deg) scale(0.8); }
+        }
+
+        .brand-core .brand-icon {
+            font-size: 72px;
+            background: linear-gradient(135deg, #5b6bf6, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 20px rgba(79, 70, 229, 0.3));
+        }
+        .brand-core h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+            color: #1d1d1f;
+        }
+        .brand-core h2 span {
+            background: linear-gradient(135deg, #3b82f6, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brand-core .tagline {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #6e6e73;
+            letter-spacing: 0.2px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .brand-core .tag {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #6e6e73;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+        .brand-core p {
+            color: #86868b;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            letter-spacing: 0.2px;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== SERVICES & REST SECTIONS ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 28px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-radius: var(--radius);
+            padding: 40px 30px 36px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .service-card:hover { transform: translateY(-8px) scale(1.01); border-color: rgba(0, 113, 227, 0.15); }
+        .service-card .icon {
+            font-size: 42px;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .service-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+        .service-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ===== SHOWREEL ===== */
+        .showreel-wrap {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            position: relative;
+            padding: 0 20px;
+        }
+        .showreel-frame {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+        .showreel-frame video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+        .showreel-title { padding: 22px 28px; text-align: center; background: rgba(255, 255, 255, 0.3); border-top: 1px solid rgba(255, 255, 255, 0.3); }
+        .showreel-title h3 { font-size: 1.5rem; font-weight: 600; }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 60px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); font-size: 20px; cursor: pointer;
+            transition: var(--transition); z-index: 10;
+        }
+        .nav-arrow:hover { background: rgba(255, 255, 255, 0.9); color: var(--text); transform: translateY(-50%) scale(1.08); }
+        .arrow-left { left: -14px; } .arrow-right { right: -14px; }
+
+        /* ===== REELS ===== */
+        .reels-row { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; margin: 50px auto 40px; }
+        .reel-card {
+            flex: 1 1 200px; min-width: 170px; max-width: 240px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-radius: 28px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.6); transition: var(--transition);
+        }
+        .reel-card:hover { transform: translateY(-8px) scale(1.02); }
+        .reel-card video { aspect-ratio: 9 / 16; width: 100%; object-fit: cover; display: block; background: #000; }
+        .reel-card .reel-info { padding: 18px 16px 20px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); }
+        .reel-card .reel-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; }
+        .reel-card .reel-info p { font-size: 0.8rem; color: var(--text-secondary); }
+
+        /* ===== CONTACT ===== */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 20px; }
+        .contact-info h3 { font-size: 28px; font-weight: 600; background: linear-gradient(135deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 32px; }
+        .contact-item { display: flex; align-items: center; gap: 20px; padding: 20px 24px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px); border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.6); margin-bottom: 14px; transition: var(--transition); }
+        .contact-item:hover { transform: translateY(-3px); border-color: rgba(0, 113, 227, 0.1); }
+        .contact-item i { font-size: 20px; background: linear-gradient(135deg, var(--accent), #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 113, 227, 0.06); border-radius: 12px; }
+        .contact-item div strong { display: block; font-size: 12px; font-weight: 500; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .contact-item a, .contact-item span { font-size: 16px; font-weight: 500; color: var(--text); }
+        .contact-item a:hover { color: var(--accent); }
+        
+        .contact-form { background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px); padding: 44px 40px; border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.6); }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 16px 20px; background: rgba(255, 255, 255, 0.5); border: 1.5px solid rgba(0, 0, 0, 0.06); border-radius: var(--radius-sm); font-size: 16px; font-family: inherit; transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, 0.8); }
+        .contact-form button { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--accent), #6366f1); color: #fff; border: none; border-radius: 40px; font-size: 17px; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: inherit; }
+        .contact-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(0, 113, 227, 0.4); }
+
+        /* ===== FOOTER & BUTTON ===== */
+        .footer { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(20px); padding: 48px 48px 32px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.6); margin-top: 40px; position: relative; z-index: 2; }
+        .footer-social { display: flex; justify-content: center; gap: 14px; margin-bottom: 20px; }
+        .footer p { font-size: 14px; color: var(--text-secondary); }
+        .footer .highlight { background: linear-gradient(135deg, var(--accent), #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 500; }
+
+        .portfolio-btn { position: fixed; bottom: 28px; right: 28px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); border-radius: 40px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; font-weight: 500; gap: 8px; padding: 0 22px; height: 48px; transition: var(--transition); border: 1px solid rgba(255, 255, 255, 0.8); z-index: 999; text-decoration: none; font-family: inherit; cursor: pointer; }
+        .portfolio-btn:hover { transform: translateY(-4px) scale(1.04); color: var(--text); border-color: var(--accent); }
+        .portfolio-btn i { font-size: 16px; background: linear-gradient(135deg, var(--accent), #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        /* ===== MEDIA QUERIES ===== */
+        @media (max-width: 1100px) {
+            .hero { flex-direction: column; text-align: center; gap: 50px; min-height: auto; padding-top: 90px; }
+            .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+            .hero-content p { max-width: 100%; }
+            .hero-buttons, .hero-social { justify-content: center; }
+            .hero-image { flex: 0 0 auto; width: 100%; display: flex; justify-content: center; }
+            .hero-frame { width: 380px; height: 480px; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 0 20px; height: 64px; }
+            .main-nav { position: fixed; top: 0; right: -100%; width: 74%; max-width: 300px; height: 100vh; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); flex-direction: column; justify-content: center; align-items: center; gap: 28px; padding: 2rem; border-left: 1px solid rgba(0, 0, 0, 0.04); transition: right 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); }
+            .main-nav.open { right: 0; }
+            .main-nav a { font-size: 1.2rem; }
+            .hamburger { display: flex; }
+            section { padding: 80px 20px 50px; }
+            .section-title { font-size: 32px; }
+            .hero-content h1 { font-size: 38px; }
+            .hero-content h2 { font-size: 22px; min-height: 36px; }
+            .hero-frame { width: 300px; height: 380px; }
+            .avatar-img { left: 10%; transform: translate(-50%, -50%) rotate(-8deg) scale(0.85); } /* Mobile par adjust */
+            .brand-core { margin-left: 40px; width: 85%; padding: 1.5rem; }
+            .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
+            .reel-card { max-width: 100%; flex: 1 1 160px; }
+            .contact-form { padding: 28px 20px; }
+            .arrow-left { left: -6px; } .arrow-right { right: -6px; }
+            .nav-arrow { width: 40px; height: 40px; font-size: 16px; }
+            .showreel-title h3 { font-size: 1.1rem; }
+            .portfolio-btn { padding: 0 16px; height: 42px; font-size: 13px; bottom: 20px; right: 20px; }
+        }
+        @media (max-width: 480px) {
+            .hero-frame { width: 240px; height: 300px; }
+            .hero-content h1 { font-size: 30px; }
+            .hero-content h2 { font-size: 18px; min-height: 30px; }
+            .btn-primary, .btn-outline { padding: 12px 22px; font-size: 14px; }
+            section { padding: 70px 16px 35px; }
+            .brand-core h2 { font-size: 2rem; }
+            .portfolio-btn { padding: 0 14px; height: 38px; font-size: 12px; bottom: 16px; right: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PARALLAX BACKGROUND ===== -->
+    <div class="parallax-bg" id="parallaxBg">
+        <div class="layer layer-1"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-3"></div>
+        <div class="layer layer-4"></div>
+        <div class="layer layer-5"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <!-- HEADER -->
+    <header>
+        <a href="#home" class="logo">Clip<span>i Hub</span></a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav" id="mainNav">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="badge">✦ premium creative studio</span>
+            <h1>Hi, It's <span>Clipi Hub</span></h1>
+            <h2>I'm a <span class="typed-text" id="element"></span></h2>
+            <p>Professional video editor, colorist &amp; motion designer. Crafting cinematic stories, dynamic edits, and visual identities — pure creative fire for video &amp; graphics.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Hire Me <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn-outline">Contact Me</a>
+            </div>
+            <div class="hero-social">
+                <a href="https://www.instagram.com/clipihub.co/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/clipihub" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/clipi-hub-23b498397/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/clipihub" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-frame">
+                <!-- AVATAR IMAGE IS NOW ON TOP (z-index: 1) AND MORE LEFT -->
+                <img src="avatar-bg.png" class="avatar-img" alt="Avatar">
+                
+                <div class="brand-core">
+                    <i class="fas fa-video brand-icon"></i>
+                    <h2>Clip<span>i Hub</span></h2>
+                    <div class="tagline">Editing · Motion Design · Graphic Design</div>
+                    <div class="tag">creative studio</div>
+                    <p>where creativity meets reality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2 class="section-title">My <span class="highlight">Services</span></h2>
+        <p class="section-sub">Premium post-production &amp; creative services tailored to your brand.</p>
+        <div class="services-grid">
+            <div class="service-card"><div class="icon"><i class="fas fa-film"></i></div><h3>Video Editing</h3><p>Cinematic edits, storytelling cuts, and pacing that captivates audiences.</p></div>
+            <div class="service-card"><div class="icon"><i class="fas fa-palette"></i></div><h3>Color Grading</h3><p>Professional color correction &amp; look design to match your brand's mood.</p></div>
+            <div class="service-card"><div class="icon"><i class="fas fa-magic"></i></div><h3>Motion Graphics</h3><p>Animated titles, kinetic typography, logo animations, and visual effects.</p></div>
+            <div class="service-card"><div class="icon"><i class="fas fa-image"></i></div><h3>Photoshop Editing</h3><p>High-end retouching, background removal, and creative manipulations.</p></div>
+            <div class="service-card"><div class="icon"><i class="fas fa-drafting-compass"></i></div><h3>Logo Design</h3><p>Unique, memorable logos that capture your brand's essence.</p></div>
+            <div class="service-card"><div class="icon"><i class="fas fa-chart-line"></i></div><h3>Social Media Reels</h3><p>Viral-ready edits for Instagram, TikTok, YouTube Shorts.</p></div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+        <h2 class="section-title">My <span class="highlight">Portfolio</span></h2>
+        <p class="section-sub">Featured work &amp; recent projects.</p>
+
+        <div class="showreel-wrap">
+            <div class="showreel-frame">
+                <video id="showreelVideo" controls preload="metadata"><source src="EditorIntroduction.mp4" type="video/mp4"></video>
+                <div class="showreel-title"><h3 id="videoTitle">Apple Style UI Editing</h3></div>
+            </div>
+            <div class="nav-arrow arrow-left" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
+            <div class="nav-arrow arrow-right" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
+        </div>
+
+        <div class="reels-row">
+            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="IMG_3540.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-microphone-alt"></i> Talking Head</h4><p>Clean jump cuts, B‑roll, subtitles.</p></div></div>
+            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="BLINKIT3D.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-home"></i> Playing with 3d Icons</h4><p>Smooth transitions, drone shots.</p></div></div>
+            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="ManthanFinal.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-podcast"></i> Advertisements</h4><p>Multi‑cam sync, audio cleanup.</p></div></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">Let's <span class="highlight">Talk</span></h2>
+        <p class="section-sub">Ready to take your content to the next level? Reach out today.</p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <div class="contact-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><br><a href="mailto:gurmatsingh@gmail.com">gurmatsingh@gmail.com</a></div></div>
+                <div class="contact-item"><i class="fas fa-phone"></i><div><strong>Phone</strong><br><a href="tel:+918727984560">+91 87279 84560</a></div></div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Location</strong><br><span>Chandigarh</span></div></div>
+            </div>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group"><input type="text" id="user_name" placeholder="Your Name" required /></div>
+                <div class="form-group"><input type="email" id="user_email" placeholder="Your Email" required /></div>
+                <div class="form-group"><input type="text" id="project_type" placeholder="Project Type" required /></div>
+                <div class="form-group"><textarea id="message" rows="4" placeholder="Tell us about your project..."></textarea></div>
+                <button type="submit">Send Message <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/clipihub.co/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/clipihub" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/clipi-hub-23b498397/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/clipihub" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+        <p>© 2024 <span class="highlight">Clipi Hub Studio</span>. All rights reserved. Built with ❤️ for digital excellence.</p>
+    </footer>
+
+    <!-- PORTFOLIO BUTTON -->
+    <a href="https://drive.google.com/drive/folders/1GzezXKxDaRaPYU04GTtnrhAfWD8Z3qLT?usp=share_link" target="_blank" rel="noopener noreferrer" class="portfolio-btn"><i class="fas fa-folder-open"></i> Portfolio</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // HAMBURGER
+            const hamburger = document.getElementById('hamburger');
+            const mainNav = document.getElementById('mainNav');
+            if (hamburger && mainNav) {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    mainNav.classList.toggle('open');
+                });
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        mainNav.classList.remove('open');
+                    });
+                });
+                document.addEventListener('click', function(e) {
+                    if (!mainNav.contains(e.target) && !hamburger.contains(e.target)) {
+                        hamburger.classList.remove('active');
+                        mainNav.classList.remove('open');
+                    }
+                });
+            }
+
+            // TYPED.JS
+            if (typeof Typed !== 'undefined') {
+                new Typed('#element', {
+                    strings: ['Video Editor', 'Colorist', 'Motion Designer', 'Visual Storyteller'],
+                    typeSpeed: 50, backSpeed: 30, backDelay: 1500, startDelay: 300, loop: true, showCursor: true, cursorChar: '|'
+                });
+            } else {
+                document.getElementById('element').textContent = 'Video Editor';
+            }
+
+            // SHOWREEL
+            const playlist = [
+                { title: "Apple Style UI Editing", src: "EditorIntroduction.mp4" },
+                { title: "SaaS Apple UI Animation", src: "BeenOn.mp4" }
+            ];
+            let currentIndex = 0;
+            const videoPlayer = document.getElementById('showreelVideo');
+            const titleElement = document.getElementById('videoTitle');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            function loadVideo(index) {
+                if (index < 0) index = playlist.length - 1;
+                if (index >= playlist.length) index = 0;
+                currentIndex = index;
+                const item = playlist[currentIndex];
+                if (videoPlayer) {
+                    const wasPlaying = !videoPlayer.paused;
+                    videoPlayer.pause();
+                    videoPlayer.src = item.src;
+                    videoPlayer.load();
+                    if (titleElement) titleElement.textContent = item.title;
+                    if (wasPlaying) { videoPlayer.play().catch(function(e) {}); }
+                }
+            }
+            if (prevBtn && nextBtn && videoPlayer) {
+                videoPlayer.src = playlist[0].src;
+                videoPlayer.load();
+                if (titleElement) titleElement.textContent = playlist[0].title;
+                prevBtn.addEventListener('click', function() { loadVideo(currentIndex - 1); });
+                nextBtn.addEventListener('click', function() { loadVideo(currentIndex + 1); });
+            }
+
+            // CONTACT FORM (EMAILJS)
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('user_name').value;
+                    const email = document.getElementById('user_email').value;
+                    const project = document.getElementById('project_type').value;
+                    const message = document.getElementById('message').value;
+
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        project_type: project,
+                        message: message,
+                    };
+
+                    emailjs.send('service_yxpowh2', 'template_8t4f7kg', templateParams)
+                        .then(function(response) {
+                            alert('✅ Thanks ' + name + '! Your message has been sent successfully!');
+                            contactForm.reset();
+                        }, function(error) {
+                            alert('❌ Oops! Something went wrong. Please try again later.');
+                            console.log('FAILED...', error);
+                        });
+                });
+            }
+
+            // PARALLAX
+            const parallaxBg = document.getElementById('parallaxBg');
+            const layers = parallaxBg.querySelectorAll('.layer');
+            if (parallaxBg) {
+                let lastScrollY = 0;
+                let ticking = false;
+                window.addEventListener('scroll', function() {
+                    lastScrollY = window.scrollY;
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            const scrollY = lastScrollY;
+                            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                            const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+                            const translateY = progress * -30;
+                            parallaxBg.style.transform = 'translateY(' + translateY + 'px)';
+                            layers.forEach(function(layer, index) {
+                                const speed = 0.2 + (index * 0.12);
+                                const moveY = progress * (40 + index * 15) * speed;
+                                const scale = 1 + progress * 0.04;
+                                layer.style.transform = 'translateY(' + moveY + 'px) scale(' + scale + ')';
+                            });
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+        });
+    </script>
+</body>
+</html>
