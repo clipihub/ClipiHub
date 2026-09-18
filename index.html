@@ -1,3 +1,5 @@
+Here is the updated HTML code for your Clipi Hub website. I've added a premium dark mode toggle with an Apple-inspired UI and a small review slab section, all designed to work seamlessly on both phone and desktop.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +36,433 @@
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             min-height: 200vh;
+            transition: background 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        /* ===== DARK MODE VARIABLES ===== */
+        body.dark-mode {
+            --text: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --text-light: #6e6e73;
+            --accent: #0a84ff;
+            --accent-glow: rgba(10, 132, 255, 0.3);
+            background: #0a0a0c;
+        }
+        body.dark-mode .parallax-bg .layer-1 {
+            background: radial-gradient(circle, rgba(10, 132, 255, 0.12), rgba(59, 130, 246, 0.03));
+        }
+        body.dark-mode .parallax-bg .layer-2 {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.10), rgba(59, 130, 246, 0.02));
+        }
+        body.dark-mode .parallax-bg .layer-3 {
+            background: radial-gradient(circle, rgba(10, 132, 255, 0.08), transparent);
+        }
+        body.dark-mode .parallax-bg .layer-4 {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.07), transparent);
+        }
+        body.dark-mode .parallax-bg .layer-5 {
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.05), transparent);
+        }
+        body.dark-mode .grid-overlay {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        }
+        body.dark-mode header {
+            background: rgba(22, 22, 24, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2);
+        }
+        body.dark-mode .logo {
+            background: linear-gradient(135deg, #f5f5f7 40%, #0a84ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .logo span {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .main-nav a {
+            color: #a1a1a6;
+        }
+        body.dark-mode .main-nav a:hover {
+            color: #f5f5f7;
+        }
+        body.dark-mode .hamburger span {
+            background: #f5f5f7;
+        }
+        body.dark-mode .main-nav {
+            background: rgba(22, 22, 24, 0.96);
+        }
+        body.dark-mode .service-card,
+        body.dark-mode .showreel-frame,
+        body.dark-mode .reel-card,
+        body.dark-mode .loop-card,
+        body.dark-mode .contact-form,
+        body.dark-mode .contact-item,
+        body.dark-mode .footer {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .contact-item i {
+            background-color: rgba(10, 132, 255, 0.1);
+        }
+        body.dark-mode .contact-item div strong {
+            color: #6e6e73;
+        }
+        body.dark-mode .contact-item a,
+        body.dark-mode .contact-item span {
+            color: #f5f5f7;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: rgba(44, 44, 46, 0.6);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #f5f5f7;
+        }
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group textarea:focus {
+            background: rgba(44, 44, 46, 0.9);
+            border-color: #0a84ff;
+        }
+        body.dark-mode .form-group input::placeholder,
+        body.dark-mode .form-group textarea::placeholder {
+            color: #6e6e73;
+        }
+        body.dark-mode .btn-outline {
+            background: rgba(44, 44, 46, 0.5);
+            color: #f5f5f7;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .btn-outline:hover {
+            background: rgba(44, 44, 46, 0.8);
+            border-color: #0a84ff;
+        }
+        body.dark-mode .brand-core {
+            background: rgba(28, 28, 30, 0.5);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        body.dark-mode .brand-core h2 {
+            color: #f5f5f7;
+        }
+        body.dark-mode .brand-core .tag {
+            background: rgba(44, 44, 46, 0.7);
+            color: #a1a1a6;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        body.dark-mode .brand-core .tagline {
+            color: #a1a1a6;
+        }
+        body.dark-mode .brand-core p {
+            color: #6e6e73;
+        }
+        body.dark-mode .showreel-title {
+            background: rgba(28, 28, 30, 0.3);
+            border-top-color: rgba(255, 255, 255, 0.06);
+        }
+        body.dark-mode .showreel-title h3 {
+            color: #f5f5f7;
+        }
+        body.dark-mode .reel-card .reel-info {
+            background: rgba(28, 28, 30, 0.3);
+        }
+        body.dark-mode .reel-card .reel-info h4 {
+            color: #f5f5f7;
+        }
+        body.dark-mode .nav-arrow {
+            background: rgba(44, 44, 46, 0.7);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #a1a1a6;
+        }
+        body.dark-mode .nav-arrow:hover {
+            background: rgba(44, 44, 46, 0.95);
+            color: #f5f5f7;
+        }
+        body.dark-mode .portfolio-btn {
+            background: rgba(44, 44, 46, 0.7);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #a1a1a6;
+        }
+        body.dark-mode .portfolio-btn:hover {
+            color: #f5f5f7;
+            border-color: #0a84ff;
+        }
+        body.dark-mode .social-icon {
+            background: rgba(44, 44, 46, 0.5);
+            border-color: rgba(255, 255, 255, 0.06);
+            color: #a1a1a6;
+        }
+        body.dark-mode .social-icon:hover {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            color: #fff;
+        }
+        body.dark-mode .footer-social .social-icon {
+            background: rgba(44, 44, 46, 0.5);
+            border-color: rgba(255, 255, 255, 0.06);
+            color: #a1a1a6;
+        }
+        body.dark-mode .footer-social .social-icon:hover {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            color: #fff;
+        }
+        body.dark-mode .review-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .review-card .review-text {
+            color: #a1a1a6;
+        }
+        body.dark-mode .review-card .review-author {
+            color: #f5f5f7;
+        }
+        body.dark-mode .review-card .review-role {
+            color: #6e6e73;
+        }
+        body.dark-mode .review-card .fa-star {
+            color: #ffd60a;
+        }
+        body.dark-mode .section-sub {
+            color: #a1a1a6;
+        }
+        body.dark-mode .loop-reels-sub {
+            color: #a1a1a6;
+        }
+        body.dark-mode .loop-text {
+            color: #a1a1a6;
+        }
+        body.dark-mode .contact-info h3 {
+            background: linear-gradient(135deg, #f5f5f7, #0a84ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .hero-content h2 {
+            color: #a1a1a6;
+        }
+        body.dark-mode .hero-content p {
+            color: #a1a1a6;
+        }
+        body.dark-mode .section-title {
+            color: #f5f5f7;
+        }
+        body.dark-mode .section-title .highlight {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .loop-reels-title {
+            color: #f5f5f7;
+        }
+        body.dark-mode .loop-reels-title span {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .footer p {
+            color: #6e6e73;
+        }
+        body.dark-mode .footer .highlight {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .brand-core .brand-icon {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .review-card .review-stars .fa-star {
+            color: #ffd60a;
+        }
+
+        /* ===== THEME TOGGLE (APPLE UI) ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            padding: 4px;
+            overflow: hidden;
+            height: 48px;
+        }
+        .theme-toggle:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        body.dark-mode .theme-toggle {
+            background: rgba(44, 44, 46, 0.7);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        .theme-toggle .toggle-track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 76px;
+            height: 40px;
+            position: relative;
+            padding: 0 6px;
+        }
+        .theme-toggle .toggle-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 15px;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            position: relative;
+            z-index: 2;
+            color: #86868b;
+        }
+        .theme-toggle .toggle-option.active {
+            color: #1d1d1f;
+        }
+        body.dark-mode .theme-toggle .toggle-option.active {
+            color: #f5f5f7;
+        }
+        .theme-toggle .toggle-thumb {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff, #f0f0f5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            z-index: 1;
+            left: 6px;
+        }
+        body.dark-mode .theme-toggle .toggle-thumb {
+            left: 38px;
+            background: linear-gradient(135deg, #2c2c2e, #1c1c1e);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+        }
+        .theme-toggle .toggle-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 0 12px 0 6px;
+            color: #86868b;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+        body.dark-mode .theme-toggle .toggle-label {
+            color: #a1a1a6;
+        }
+
+        /* ===== REVIEW SLAB ===== */
+        .review-slab {
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+        .review-slab .section-title {
+            margin-bottom: 8px;
+        }
+        .review-slab .section-sub {
+            margin-bottom: 48px;
+        }
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .review-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-radius: var(--radius);
+            padding: 32px 28px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .review-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(0, 113, 227, 0.15);
+        }
+        .review-card .review-stars {
+            display: flex;
+            gap: 4px;
+            font-size: 14px;
+            color: #ffb800;
+        }
+        .review-card .review-stars .fa-star {
+            color: #ffb800;
+        }
+        body.dark-mode .review-card .review-stars .fa-star {
+            color: #ffd60a;
+        }
+        .review-card .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-style: italic;
+            flex: 1;
+        }
+        .review-card .review-author {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 4px;
+        }
+        .review-card .review-role {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        .review-card .review-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .review-card .review-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .review-card .review-header-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .review-card .review-header-info .review-author {
+            margin-top: 0;
+        }
+        .review-card .review-header-info .review-role {
+            margin-top: -2px;
         }
 
         /* ===== PARALLAX BACKGROUNDS ===== */
@@ -148,6 +577,7 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 1px 30px rgba(0, 0, 0, 0.02);
+            transition: background 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
         .logo {
             font-size: 26px;
@@ -396,10 +826,9 @@
             align-items: center;
             justify-content: center;
             transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-            overflow: visible; /* Crucial: avatar ko cut hone se rokta hai */
+            overflow: visible;
         }
         
-        /* THE GLASS TEXT BOX (MOVED BEHIND THE AVATAR) */
         .brand-core {
             display: flex;
             flex-direction: column;
@@ -409,7 +838,7 @@
             width: 80%;
             padding: 2.5rem 1rem;
             position: relative;
-            z-index: 0; /* AVATAR IS ABOVE THIS */
+            z-index: 0;
             
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(12px) saturate(1.8);
@@ -419,7 +848,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
             
             animation: premiumFloat 6s ease-in-out infinite alternate;
-            /* Glass ko thoda sa right shift kiya taaki avatar left se dikhe */
             margin-left: 60px; 
         }
 
@@ -428,15 +856,14 @@
             100% { transform: translateY(-15px); }
         }
 
-        /* THE DIRECT IMG TAG FOR AVATAR (ON TOP, SHIFTED MORE LEFT) */
         .avatar-img {
             position: absolute;
             top: 50%; 
-            left: 5%; /* 👈 Isko aur left kar diya hai */
-            transform: translate(-50%, -50%) rotate(-8deg) scale(0.75); /* Size thoda sa chhota kiya */
+            left: 5%;
+            transform: translate(-50%, -50%) rotate(-8deg) scale(0.75);
             width: 90%;
             height: auto;
-            z-index: 1; /* UPAR GLASS KE */
+            z-index: 1;
             pointer-events: none;
             animation: premiumAvatarTilt 8s ease-in-out infinite alternate;
         }
@@ -547,6 +974,7 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
             overflow: hidden;
+            transition: background 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
         .showreel-frame video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
         .showreel-title { padding: 22px 28px; text-align: center; background: rgba(255, 255, 255, 0.3); border-top: 1px solid rgba(255, 255, 255, 0.3); }
@@ -684,10 +1112,12 @@
             .hero-frame { width: 380px; height: 480px; }
             .contact-grid { grid-template-columns: 1fr; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); }
+            .review-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             header { padding: 0 20px; height: 64px; }
             .main-nav { position: fixed; top: 0; right: -100%; width: 74%; max-width: 300px; height: 100vh; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); flex-direction: column; justify-content: center; align-items: center; gap: 28px; padding: 2rem; border-left: 1px solid rgba(0, 0, 0, 0.04); transition: right 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); }
+            body.dark-mode .main-nav { background: rgba(22, 22, 24, 0.96); border-left-color: rgba(255, 255, 255, 0.06); }
             .main-nav.open { right: 0; }
             .main-nav a { font-size: 1.2rem; }
             .hamburger { display: flex; }
@@ -706,6 +1136,14 @@
             .showreel-title h3 { font-size: 1.1rem; }
             .portfolio-btn { padding: 0 16px; height: 42px; font-size: 13px; bottom: 20px; right: 20px; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .review-grid { grid-template-columns: 1fr; }
+            .theme-toggle { bottom: 20px; left: 20px; height: 42px; }
+            .theme-toggle .toggle-track { width: 68px; height: 34px; padding: 0 5px; }
+            .theme-toggle .toggle-option { width: 28px; height: 28px; font-size: 13px; }
+            .theme-toggle .toggle-thumb { width: 28px; height: 28px; left: 5px; }
+            body.dark-mode .theme-toggle .toggle-thumb { left: 35px; }
+            .theme-toggle .toggle-label { font-size: 10px; padding: 0 10px 0 4px; }
+            .review-slab { margin-top: 60px; padding: 0 16px; }
         }
         @media (max-width: 480px) {
             .hero-frame { width: 240px; height: 300px; }
@@ -716,6 +1154,14 @@
             .brand-core h2 { font-size: 2rem; }
             .portfolio-btn { padding: 0 14px; height: 38px; font-size: 12px; bottom: 16px; right: 16px; }
             .loop-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .theme-toggle { bottom: 16px; left: 16px; height: 38px; padding: 3px; }
+            .theme-toggle .toggle-track { width: 60px; height: 30px; padding: 0 4px; }
+            .theme-toggle .toggle-option { width: 24px; height: 24px; font-size: 11px; }
+            .theme-toggle .toggle-thumb { width: 24px; height: 24px; left: 4px; }
+            body.dark-mode .theme-toggle .toggle-thumb { left: 32px; }
+            .theme-toggle .toggle-label { font-size: 9px; padding: 0 8px 0 2px; }
+            .review-card { padding: 24px 20px 20px; }
+            .review-card .review-text { font-size: 14px; }
         }
     </style>
 </head>
@@ -741,6 +1187,7 @@
             <a href="#home">Home</a>
             <a href="#services">Services</a>
             <a href="#portfolio">Portfolio</a>
+            <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
@@ -765,9 +1212,7 @@
         </div>
         <div class="hero-image">
             <div class="hero-frame">
-                <!-- AVATAR IMAGE IS NOW ON TOP (z-index: 1) AND MORE LEFT -->
                 <img src="avatar-bg.png" class="avatar-img" alt="Avatar">
-                
                 <div class="brand-core">
                     <i class="fas fa-video brand-icon"></i>
                     <h2>Clip<span>i Hub</span></h2>
@@ -778,7 +1223,8 @@
             </div>
         </div>
     </section>
-  <!-- PORTFOLIO -->
+
+    <!-- PORTFOLIO -->
     <section id="portfolio">
         <h2 class="section-title">My <span class="highlight">Portfolio</span></h2>
         <p class="section-sub">Featured work &amp; recent projects.</p>
@@ -798,7 +1244,6 @@
             <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="ManthanFinal.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-podcast"></i> Advertisements</h4><p>Multi‑cam sync, audio cleanup.</p></div></div>
         </div>
 
-        <!-- ===== NEW LOOPED REELS 1:1 SECTION ===== -->
         <div class="loop-reels-title">More <span>Edits</span></div>
         <div class="loop-reels-sub">Fresh edits from the studio!</div>
         <div class="loop-grid">
@@ -808,9 +1253,55 @@
             <div class="loop-card"><video autoplay muted loop playsinline><source src="Discord.mp4" type="video/mp4"></video></div>
         </div>
 
-        <!-- ===== TEXT BELOW 1:1 LOOP ===== -->
         <div class="loop-text">
             <span>Want literally anything?</span> Get in touch!
+        </div>
+    </section>
+
+    <!-- REVIEW SLAB -->
+    <section id="reviews" class="review-slab">
+        <h2 class="section-title">Client <span class="highlight">Reviews</span></h2>
+        <p class="section-sub">What creators are saying about Clipi Hub.</p>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Clipi Hub transformed my raw footage into a cinematic masterpiece. The color grading and motion graphics were absolutely stunning. Highly recommended!"</p>
+                <div class="review-header">
+                    <div class="review-avatar">A</div>
+                    <div class="review-header-info">
+                        <span class="review-author">Arjun Mehta</span>
+                        <span class="review-role">Content Creator</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"The attention to detail is incredible. Every transition, every cut felt intentional and polished. My engagement went up by 40% after working with them."</p>
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-header-info">
+                        <span class="review-author">Priya Sharma</span>
+                        <span class="review-role">YouTuber &amp; Influencer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Fast, professional, and incredibly creative. They understood my brand instantly and delivered edits that exceeded my expectations. A true creative partner."</p>
+                <div class="review-header">
+                    <div class="review-avatar">R</div>
+                    <div class="review-header-info">
+                        <span class="review-author">Rohan Kapoor</span>
+                        <span class="review-role">Brand Manager</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -849,8 +1340,59 @@
     <!-- PORTFOLIO BUTTON -->
     <a href="https://drive.google.com/drive/folders/1GzezXKxDaRaPYU04GTtnrhAfWD8Z3qLT?usp=share_link" target="_blank" rel="noopener noreferrer" class="portfolio-btn"><i class="fas fa-folder-open"></i> Portfolio</a>
 
+    <!-- THEME TOGGLE (Apple UI) -->
+    <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle dark mode" tabindex="0">
+        <div class="toggle-track">
+            <div class="toggle-option" id="sunOption"><i class="fas fa-sun"></i></div>
+            <div class="toggle-option" id="moonOption"><i class="fas fa-moon"></i></div>
+            <div class="toggle-thumb" id="toggleThumb"></div>
+        </div>
+        <span class="toggle-label" id="toggleLabel">Light</span>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== THEME TOGGLE =====
+            const themeToggle = document.getElementById('themeToggle');
+            const toggleLabel = document.getElementById('toggleLabel');
+            const sunOption = document.getElementById('sunOption');
+            const moonOption = document.getElementById('moonOption');
+            const body = document.body;
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('clipihub-theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                toggleLabel.textContent = 'Dark';
+                sunOption.classList.remove('active');
+                moonOption.classList.add('active');
+            } else {
+                sunOption.classList.add('active');
+                moonOption.classList.remove('active');
+            }
+
+            function toggleTheme() {
+                body.classList.toggle('dark-mode');
+                const isDark = body.classList.contains('dark-mode');
+                localStorage.setItem('clipihub-theme', isDark ? 'dark' : 'light');
+                toggleLabel.textContent = isDark ? 'Dark' : 'Light';
+                if (isDark) {
+                    sunOption.classList.remove('active');
+                    moonOption.classList.add('active');
+                } else {
+                    sunOption.classList.add('active');
+                    moonOption.classList.remove('active');
+                }
+            }
+
+            themeToggle.addEventListener('click', toggleTheme);
+            themeToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
 
             // HAMBURGER
             const hamburger = document.getElementById('hamburger');
@@ -874,6 +1416,7 @@
                     }
                 });
             }
+
             // TYPED.JS
             if (typeof Typed !== 'undefined') {
                 new Typed('#element', {
@@ -884,7 +1427,7 @@
                 document.getElementById('element').textContent = 'Video Editor';
             }
 
-            // SHOWREEL with 4 videos (updated)
+            // SHOWREEL with 4 videos
             const playlist = [
                 { title: "Apple Style UI Editing", src: "EditorIntroduction.mp4" },
                 { title: "SaaS Apple UI Animation", src: "BeenOn.mp4" },
@@ -978,3 +1521,4 @@
     </script>
 </body>
 </html>
+```
