@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover" />
     <title>Clipi Hub · Premium Creative Studio</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -25,6 +25,7 @@
         }
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
@@ -33,7 +34,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            min-height: 200vh;
+            position: relative;
             transition: background 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
@@ -280,6 +281,486 @@
         body.dark-mode .review-card .review-stars .fa-star {
             color: #ffd60a;
         }
+        /* ===== PROJECT FILES — DARK MODE ===== */
+        body.dark-mode .file-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .file-card .file-body h4 { color: #f5f5f7; }
+        body.dark-mode .file-card .file-body p { color: #a1a1a6; }
+        body.dark-mode .file-card .file-meta { color: #6e6e73; border-top-color: rgba(255, 255, 255, 0.06); }
+        body.dark-mode .file-card .file-btn {
+            background: rgba(44, 44, 46, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #f5f5f7;
+        }
+        body.dark-mode .file-card .file-btn:hover {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        /* ===== FILE DETAIL PAGE (full-screen) ===== */
+        .file-detail-page {
+            position: fixed;
+            inset: 0;
+            z-index: 9500;
+            background: #f5f5f7;
+            overflow-y: auto;
+            overflow-x: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+            -webkit-overflow-scrolling: touch;
+        }
+        body.dark-mode .file-detail-page {
+            background: #0a0a0c;
+        }
+        .file-detail-page.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .file-detail-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .file-detail-bg .fd-layer {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+        }
+        .file-detail-bg .fd-layer-1 {
+            width: 600px; height: 600px; top: -8%; left: -6%;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.18), transparent 70%);
+        }
+        .file-detail-bg .fd-layer-2 {
+            width: 500px; height: 500px; bottom: -10%; right: -8%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.16), transparent 70%);
+        }
+        body.dark-mode .file-detail-bg .fd-layer-1 {
+            background: radial-gradient(circle, rgba(10, 132, 255, 0.15), transparent 70%);
+        }
+        body.dark-mode .file-detail-bg .fd-layer-2 {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.13), transparent 70%);
+        }
+        .file-detail-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 48px 80px;
+        }
+        .file-detail-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 36px;
+        }
+        .file-detail-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 22px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px) saturate(1.6);
+            -webkit-backdrop-filter: blur(16px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        .file-detail-back:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .file-detail-back i { font-size: 13px; }
+        body.dark-mode .file-detail-back {
+            background: rgba(44, 44, 46, 0.6);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #f5f5f7;
+        }
+        body.dark-mode .file-detail-back:hover {
+            border-color: #0a84ff;
+            color: #0a84ff;
+        }
+        .file-detail-logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #1d1d1f 40%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .file-detail-logo span {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .file-detail-logo {
+            background: linear-gradient(135deg, #f5f5f7 40%, #0a84ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.dark-mode .file-detail-logo span {
+            background: linear-gradient(135deg, #0a84ff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .file-detail-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 44px;
+            align-items: start;
+        }
+        .file-detail-cover {
+            width: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+            aspect-ratio: 16 / 11;
+            position: relative;
+        }
+        .file-detail-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .file-detail-cover .fd-cover-tag {
+            position: absolute;
+            top: 18px; right: 18px;
+            padding: 7px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+        .file-detail-cover .fd-cover-tag.free {
+            background: rgba(34, 197, 94, 0.9);
+            color: #fff;
+        }
+        .file-detail-cover .fd-cover-tag.paid {
+            background: rgba(255, 255, 255, 0.92);
+            color: #0a84ff;
+        }
+        body.dark-mode .file-detail-cover {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ===== VIDEO PREVIEW UNDER COVER ===== */
+        .fd-preview-video {
+            margin-top: 24px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+        body.dark-mode .fd-preview-video {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .fd-preview-video .fd-preview-label {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .fd-preview-video .fd-preview-label i {
+            font-size: 11px;
+            color: #ff4d4d;
+            animation: recPulse 1.6s ease-in-out infinite;
+        }
+        @keyframes recPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+        .fd-preview-video video {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+        .fd-preview-video .fd-preview-caption {
+            padding: 14px 20px 16px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        body.dark-mode .fd-preview-video .fd-preview-caption {
+            background: rgba(28, 28, 30, 0.3);
+            border-top-color: rgba(255, 255, 255, 0.06);
+            color: #a1a1a6;
+        }
+        .fd-preview-video .fd-preview-caption i {
+            color: var(--accent);
+            font-size: 13px;
+        }
+        .fd-preview-video.hidden {
+            display: none;
+        }
+
+        .file-detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .file-detail-icon-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .file-detail-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(0, 113, 227, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--accent);
+        }
+        body.dark-mode .file-detail-icon {
+            background: rgba(10, 132, 255, 0.12);
+            color: #0a84ff;
+        }
+        .file-detail-icon-meta {
+            display: flex;
+            flex-direction: column;
+        }
+        .file-detail-icon-meta span:first-child {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        .file-detail-icon-meta span:last-child {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .file-detail-info h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--text);
+        }
+        .file-detail-info .fd-desc {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+        .file-detail-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .fd-spec {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        body.dark-mode .fd-spec {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .fd-spec .spec-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        .fd-spec .spec-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .fd-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .fd-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+        .fd-features li i {
+            color: #22c55e;
+            font-size: 14px;
+        }
+        .fd-price-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+        body.dark-mode .fd-price-block {
+            background: rgba(28, 28, 30, 0.6);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .fd-price-block .fd-price {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .fd-price-block .fd-price.free {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .fd-price-block .fd-price-note {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+        .fd-primary-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .fd-primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 113, 227, 0.4);
+        }
+        .fd-primary-btn.free {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            box-shadow: 0 4px 24px rgba(34, 197, 94, 0.3);
+        }
+        .fd-primary-btn.free:hover {
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
+        }
+
+        /* ===== PAYMENT INFO NOTICE ===== */
+        .fd-payment-notice {
+            display: none;
+            margin-top: 20px;
+            padding: 18px 22px;
+            background: rgba(0, 113, 227, 0.06);
+            border: 1px solid rgba(0, 113, 227, 0.15);
+            border-radius: 18px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+        body.dark-mode .fd-payment-notice {
+            background: rgba(10, 132, 255, 0.08);
+            border-color: rgba(10, 132, 255, 0.2);
+            color: #a1a1a6;
+        }
+        .fd-payment-notice.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        .fd-payment-notice strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+        .fd-payment-notice i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .file-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .file-detail-info h1 { font-size: 2rem; }
+            .file-detail-inner { padding: 28px 22px 60px; }
+        }
+        @media (max-width: 480px) {
+            .file-detail-info h1 { font-size: 1.6rem; }
+            .file-detail-inner { padding: 22px 16px 50px; }
+            .fd-price-block .fd-price { font-size: 1.6rem; }
+            .file-detail-specs { grid-template-columns: 1fr; }
+            .fd-preview-video video { aspect-ratio: 16 / 12; }
+        }
 
         /* ===== THEME TOGGLE (APPLE UI) ===== */
         .theme-toggle {
@@ -474,6 +955,8 @@
             pointer-events: none;
             overflow: hidden;
             will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .parallax-bg .layer {
             position: absolute;
@@ -542,6 +1025,273 @@
             background-size: 60px 60px;
             z-index: 1;
             pointer-events: none;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* ===== CURSOR SQUISHY BLOBS (SUBTLE / PROFESSIONAL) ===== */
+        .cursor-blob {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform;
+            transform: translate(-50%, -50%) scale(1);
+            border-radius: 50%;
+            filter: blur(72px) saturate(1.15);
+            opacity: 0.32;
+            mix-blend-mode: multiply;
+            transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        body.dark-mode .cursor-blob {
+            mix-blend-mode: screen;
+            opacity: 0.22;
+            filter: blur(80px) saturate(1.2);
+        }
+        .cursor-blob.b1 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle at 35% 35%, rgba(0, 113, 227, 0.42), rgba(99, 102, 241, 0.08) 70%);
+        }
+        .cursor-blob.b2 {
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.28), rgba(236, 72, 153, 0.04) 75%);
+            filter: blur(90px) saturate(1.15);
+        }
+        .cursor-blob.b3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 45% 45%, rgba(59, 130, 246, 0.32), transparent 70%);
+            filter: blur(60px) saturate(1.2);
+        }
+
+        .cursor-blob.turbulent {
+            animation: turbulenceWarp 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        @keyframes turbulenceWarp {
+            0%   { filter: blur(72px) saturate(1.15) hue-rotate(0deg); }
+            50%  { filter: blur(78px) saturate(1.35) hue-rotate(6deg); }
+            100% { filter: blur(72px) saturate(1.15) hue-rotate(0deg); }
+        }
+        body.dark-mode .cursor-blob.turbulent {
+            animation: turbulenceWarpDark 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        @keyframes turbulenceWarpDark {
+            0%   { filter: blur(80px) saturate(1.2) hue-rotate(0deg); }
+            50%  { filter: blur(86px) saturate(1.4) hue-rotate(-5deg); }
+            100% { filter: blur(80px) saturate(1.2) hue-rotate(0deg); }
+        }
+
+        .cursor-blob.squish {
+            animation: blobSquish 0.55s cubic-bezier(0.34, 1.3, 0.64, 1);
+        }
+        @keyframes blobSquish {
+            0%   { transform: translate(-50%, -50%) scale(1, 1); }
+            40%  { transform: translate(-50%, -50%) scale(1.12, 0.9); }
+            70%  { transform: translate(-50%, -50%) scale(0.96, 1.05); }
+            100% { transform: translate(-50%, -50%) scale(1, 1); }
+        }
+
+        /* ===== CLICK RIPPLE ===== */
+        .click-ripple {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(0);
+            border: 1.5px solid rgba(0, 113, 227, 0.28);
+            box-shadow: 0 0 20px rgba(0, 113, 227, 0.12);
+            animation: rippleExpand 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            mix-blend-mode: normal;
+        }
+        body.dark-mode .click-ripple {
+            border-color: rgba(10, 132, 255, 0.32);
+            box-shadow: 0 0 28px rgba(10, 132, 255, 0.18);
+        }
+        @keyframes rippleExpand {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0.5; border-width: 1.5px; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; border-width: 0.5px; }
+        }
+        .click-ripple.ring2 {
+            border-width: 1px;
+            border-color: rgba(139, 92, 246, 0.22);
+            animation-duration: 1s;
+            animation-delay: 0.08s;
+        }
+        .turbulence-layer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            background: radial-gradient(circle at var(--tx, 50%) var(--ty, 50%), rgba(0, 113, 227, 0.05), transparent 35%);
+            transition: opacity 0.5s ease;
+            mix-blend-mode: overlay;
+        }
+        .turbulence-layer.active {
+            opacity: 1;
+            animation: turbulencePulse 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes turbulencePulse {
+            0%   { opacity: 0; transform: scale(1); }
+            40%  { opacity: 0.5; transform: scale(1.01); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
+        /* ===================================================== */
+        /* ===== MOBILE PERFORMANCE FIXES (disables heavy FX) ===== */
+        /* ===================================================== */
+        @media (max-width: 768px) {
+            /* Hide heavy fixed-layer effects */
+            .cursor-blob,
+            .click-ripple,
+            .turbulence-layer {
+                display: none !important;
+            }
+
+            /* Kill backdrop-filter blur across the board — biggest mobile glitch source */
+            header,
+            .service-card,
+            .showreel-frame,
+            .reel-card,
+            .loop-card,
+            .contact-form,
+            .contact-item,
+            .footer,
+            .file-card,
+            .review-card,
+            .brand-core,
+            .theme-toggle,
+            .portfolio-btn,
+            .file-detail-cover,
+            .fd-preview-video,
+            .fd-payment-notice,
+            .fd-price-block,
+            .fd-spec,
+            .file-detail-back,
+            .nav-arrow,
+            .btn-outline,
+            .social-icon,
+            .file-detail-cover .fd-cover-tag,
+            .fd-preview-video .fd-preview-label,
+            .hero-content .badge,
+            .main-nav,
+            .showreel-title,
+            .reel-card .reel-info {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            /* Solid fallbacks so design still looks right */
+            header { background: rgba(255, 255, 255, 0.98) !important; }
+            body.dark-mode header { background: rgba(22, 22, 24, 0.98) !important; }
+
+            .service-card,
+            .showreel-frame,
+            .reel-card,
+            .loop-card,
+            .contact-form,
+            .contact-item,
+            .review-card,
+            .file-card,
+            .brand-core,
+            .file-detail-cover,
+            .fd-preview-video,
+            .fd-spec,
+            .fd-price-block,
+            .footer {
+                background: rgba(255, 255, 255, 0.92) !important;
+            }
+            body.dark-mode .service-card,
+            body.dark-mode .showreel-frame,
+            body.dark-mode .reel-card,
+            body.dark-mode .loop-card,
+            body.dark-mode .contact-form,
+            body.dark-mode .contact-item,
+            body.dark-mode .review-card,
+            body.dark-mode .file-card,
+            body.dark-mode .brand-core,
+            body.dark-mode .file-detail-cover,
+            body.dark-mode .fd-preview-video,
+            body.dark-mode .fd-spec,
+            body.dark-mode .fd-price-block,
+            body.dark-mode .footer {
+                background: rgba(28, 28, 30, 0.95) !important;
+            }
+
+            .theme-toggle { background: rgba(255, 255, 255, 0.95) !important; }
+            body.dark-mode .theme-toggle { background: rgba(44, 44, 46, 0.95) !important; }
+
+            .portfolio-btn { background: rgba(255, 255, 255, 0.95) !important; }
+            body.dark-mode .portfolio-btn { background: rgba(44, 44, 46, 0.95) !important; }
+
+            .nav-arrow { background: rgba(255, 255, 255, 0.95) !important; }
+            body.dark-mode .nav-arrow { background: rgba(44, 44, 46, 0.95) !important; }
+
+            .btn-outline { background: rgba(255, 255, 255, 0.9) !important; }
+            body.dark-mode .btn-outline { background: rgba(44, 44, 46, 0.9) !important; }
+
+            .social-icon { background: rgba(255, 255, 255, 0.9) !important; }
+            body.dark-mode .social-icon { background: rgba(44, 44, 46, 0.9) !important; }
+
+            .main-nav { background: rgba(255, 255, 255, 0.98) !important; }
+            body.dark-mode .main-nav { background: rgba(22, 22, 24, 0.98) !important; }
+
+            /* Prevent sticky hover transforms on touch devices */
+            .service-card:hover,
+            .file-card:hover,
+            .review-card:hover,
+            .reel-card:hover,
+            .loop-card:hover,
+            .btn-primary:hover,
+            .btn-outline:hover,
+            .file-detail-back:hover,
+            .nav-arrow:hover,
+            .fd-primary-btn:hover,
+            .contact-form button:hover,
+            .social-icon:hover,
+            .theme-toggle:hover,
+            .portfolio-btn:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Hero — remove 100vh jump */
+            .hero {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            /* Detail page — kill transform transition (jittery on some androids) */
+            .file-detail-page {
+                transition: opacity 0.3s ease !important;
+                transform: none !important;
+            }
+            .file-detail-page.active {
+                transform: none !important;
+            }
+
+            /* Videos — reduce GPU load */
+            video {
+                will-change: auto !important;
+                transform: translateZ(0);
+            }
+        }
+
+        /* iOS safe-area for floating buttons */
+        @supports (padding: max(0px)) {
+            .theme-toggle {
+                bottom: max(24px, env(safe-area-inset-bottom, 24px));
+                left: max(20px, env(safe-area-inset-left, 20px));
+            }
+            .portfolio-btn {
+                bottom: max(24px, env(safe-area-inset-bottom, 24px));
+                right: max(20px, env(safe-area-inset-right, 20px));
+            }
         }
 
         a { text-decoration: none; color: inherit; }
@@ -1072,6 +1822,197 @@
             background-clip: text;
             font-weight: 500;
         }
+
+        /* ===== PROJECT FILES SECTION (WITH COVERS) ===== */
+        .project-files-section {
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+        .project-files-title {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .project-files-title span {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .project-files-sub {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 44px;
+        }
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+            max-width: 1040px;
+            margin: 0 auto 40px;
+        }
+        .file-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .file-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 113, 227, 0.18);
+            box-shadow: 0 12px 40px rgba(0, 113, 227, 0.08);
+        }
+        .file-card .file-cover {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: linear-gradient(135deg, #dfe4ff, #f0e7ff);
+        }
+        .file-card .file-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .file-card:hover .file-cover img {
+            transform: scale(1.06);
+        }
+        .file-card .file-cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%);
+            pointer-events: none;
+        }
+        .file-card .cover-icon {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--accent);
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        .file-card .cover-tag {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .file-card .cover-tag.free {
+            background: rgba(34, 197, 94, 0.9);
+            color: #fff;
+        }
+        .file-card .cover-tag.paid {
+            background: rgba(255, 255, 255, 0.92);
+            color: #0a84ff;
+        }
+        .file-card .file-body {
+            padding: 20px 22px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .file-card .file-body h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        .file-card .file-body p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            flex: 1;
+        }
+        .file-card .file-meta {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            display: flex;
+            gap: 14px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            margin-top: 4px;
+            padding-top: 10px;
+        }
+        .file-card .file-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .file-card .file-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 6px;
+        }
+        .file-price-badge {
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.2px;
+        }
+        .file-price-badge.free {
+            background: rgba(34, 197, 94, 0.12);
+            color: #16a34a;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        body.dark-mode .file-price-badge.free {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+        .file-price-badge.paid {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            color: #fff;
+            border: 1px solid transparent;
+        }
+        .file-card .file-btn {
+            padding: 9px 18px;
+            border-radius: 40px;
+            border: 1.5px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            pointer-events: none;
+        }
+        .file-card:hover .file-btn {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            color: #fff;
+            border-color: transparent;
+        }
+
         /* ===== CONTACT ===== */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 20px; }
         .contact-info h3 { font-size: 28px; font-weight: 600; background: linear-gradient(135deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 32px; text-align: left; }
@@ -1111,6 +2052,7 @@
             .contact-grid { grid-template-columns: 1fr; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); }
             .review-grid { grid-template-columns: repeat(2, 1fr); }
+            .files-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             header { padding: 0 20px; height: 64px; }
@@ -1135,6 +2077,7 @@
             .portfolio-btn { padding: 0 16px; height: 42px; font-size: 13px; bottom: 20px; right: 20px; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
             .review-grid { grid-template-columns: 1fr; }
+            .files-grid { grid-template-columns: 1fr; }
             .theme-toggle { bottom: 20px; left: 20px; height: 42px; }
             .theme-toggle .toggle-track { width: 68px; height: 34px; padding: 0 5px; }
             .theme-toggle .toggle-option { width: 28px; height: 28px; font-size: 13px; }
@@ -1174,6 +2117,14 @@
         <div class="layer layer-5"></div>
     </div>
     <div class="grid-overlay"></div>
+
+    <!-- ===== CURSOR SQUISHY BLOBS ===== -->
+    <div class="cursor-blob b1" id="blob1"></div>
+    <div class="cursor-blob b2" id="blob2"></div>
+    <div class="cursor-blob b3" id="blob3"></div>
+
+    <!-- ===== TURBULENCE LAYER (on click) ===== -->
+    <div class="turbulence-layer" id="turbulenceLayer"></div>
 
     <!-- HEADER -->
     <header>
@@ -1229,7 +2180,7 @@
 
         <div class="showreel-wrap">
             <div class="showreel-frame">
-                <video id="showreelVideo" controls preload="metadata"><source src="EditorIntroduction.mp4" type="video/mp4"></video>
+                <video id="showreelVideo" controls preload="metadata" playsinline webkit-playsinline><source src="EditorIntroduction.mp4" type="video/mp4"></video>
                 <div class="showreel-title"><h3 id="videoTitle">Apple Style UI Editing</h3></div>
             </div>
             <div class="nav-arrow arrow-left" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
@@ -1237,22 +2188,31 @@
         </div>
 
         <div class="reels-row">
-            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="IMG_3540.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-microphone-alt"></i> Talking Head</h4><p>Clean jump cuts, B‑roll, subtitles.</p></div></div>
-            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="BLINKIT3D.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-home"></i> Playing with 3d Icons</h4><p>Smooth transitions, drone shots.</p></div></div>
-            <div class="reel-card"><video preload="metadata" autoplay muted loop playsinline><source src="ManthanFinal.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-podcast"></i> Advertisements</h4><p>Multi‑cam sync, audio cleanup.</p></div></div>
+            <div class="reel-card"><video preload="none" autoplay muted loop playsinline webkit-playsinline><source src="IMG_3540.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-microphone-alt"></i> Talking Head</h4><p>Clean jump cuts, B‑roll, subtitles.</p></div></div>
+            <div class="reel-card"><video preload="none" autoplay muted loop playsinline webkit-playsinline><source src="BLINKIT3D.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-home"></i> Playing with 3d Icons</h4><p>Smooth transitions, drone shots.</p></div></div>
+            <div class="reel-card"><video preload="none" autoplay muted loop playsinline webkit-playsinline><source src="ManthanFinal.mp4" type="video/mp4"></video><div class="reel-info"><h4><i class="fas fa-podcast"></i> Advertisements</h4><p>Multi‑cam sync, audio cleanup.</p></div></div>
         </div>
 
         <div class="loop-reels-title">More <span>Edits</span></div>
         <div class="loop-reels-sub">Fresh edits from the studio!</div>
         <div class="loop-grid">
-            <div class="loop-card"><video autoplay muted loop playsinline><source src="DriveUI.mp4" type="video/mp4"></video></div>
-            <div class="loop-card"><video autoplay muted loop playsinline><source src="Finall.mp4" type="video/mp4"></video></div>
-            <div class="loop-card"><video autoplay muted loop playsinline><source src="BLINKITUIEDITFINAL.mp4" type="video/mp4"></video></div>
-            <div class="loop-card"><video autoplay muted loop playsinline><source src="Discord.mp4" type="video/mp4"></video></div>
+            <div class="loop-card"><video autoplay muted loop playsinline webkit-playsinline preload="none"><source src="DriveUI.mp4" type="video/mp4"></video></div>
+            <div class="loop-card"><video autoplay muted loop playsinline webkit-playsinline preload="none"><source src="Finall.mp4" type="video/mp4"></video></div>
+            <div class="loop-card"><video autoplay muted loop playsinline webkit-playsinline preload="none"><source src="BLINKITUIEDITFINAL.mp4" type="video/mp4"></video></div>
+            <div class="loop-card"><video autoplay muted loop playsinline webkit-playsinline preload="none"><source src="Discord.mp4" type="video/mp4"></video></div>
         </div>
 
         <div class="loop-text">
             <span>Want literally anything?</span> Get in touch!
+        </div>
+
+        <!-- ===== PROJECT FILES SECTION ===== -->
+        <div class="project-files-section" id="project-files">
+            <h2 class="project-files-title">Project <span>Files</span></h2>
+            <p class="project-files-sub">Grab my source files, templates &amp; project assets — some free, some premium.</p>
+            <div class="files-grid" id="filesGrid">
+                <!-- Cards injected by JS -->
+            </div>
         </div>
     </section>
 
@@ -1348,8 +2308,102 @@
         <span class="toggle-label" id="toggleLabel">Light</span>
     </div>
 
+    <!-- ===== FILE DETAIL PAGE (full-screen) ===== -->
+    <div class="file-detail-page" id="fileDetailPage">
+        <div class="file-detail-bg">
+            <div class="fd-layer fd-layer-1"></div>
+            <div class="fd-layer fd-layer-2"></div>
+        </div>
+        <div class="file-detail-inner">
+            <div class="file-detail-topbar">
+                <button class="file-detail-back" id="detailBackBtn">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </button>
+                <div class="file-detail-logo">Clip<span>i Hub</span></div>
+            </div>
+
+            <div class="file-detail-grid">
+                <!-- Left column: cover + preview video -->
+                <div>
+                    <div class="file-detail-cover">
+                        <span class="fd-cover-tag" id="detailTag">Free</span>
+                        <img id="detailCover" src="" alt="Cover" />
+                    </div>
+
+                    <!-- ===== VIDEO PREVIEW (below cover) ===== -->
+                    <div class="fd-preview-video" id="fdPreviewVideo">
+                        <div class="fd-preview-label"><i class="fas fa-circle"></i> Preview</div>
+                        <video id="detailPreviewPlayer" controls preload="metadata" playsinline webkit-playsinline>
+                            <source id="detailPreviewSource" src="" type="video/mp4" />
+                        </video>
+                        <div class="fd-preview-caption">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Quick preview of what's inside this pack.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column: info -->
+                <div class="file-detail-info">
+                    <div class="file-detail-icon-row">
+                        <div class="file-detail-icon"><i id="detailIcon" class="fas fa-layer-group"></i></div>
+                        <div class="file-detail-icon-meta">
+                            <span>Project File</span>
+                            <span id="detailTypeLabel">Free Resource</span>
+                        </div>
+                    </div>
+
+                    <h1 id="detailTitle">File Title</h1>
+                    <p class="fd-desc" id="detailDesc">Description here.</p>
+
+                    <div class="file-detail-specs">
+                        <div class="fd-spec">
+                            <span class="spec-label">File Size</span>
+                            <span class="spec-value" id="detailSize">—</span>
+                        </div>
+                        <div class="fd-spec">
+                            <span class="spec-label">Format</span>
+                            <span class="spec-value" id="detailFormat">—</span>
+                        </div>
+                    </div>
+
+                    <ul class="fd-features">
+                        <li><i class="fas fa-check-circle"></i> Instant delivery after payment</li>
+                        <li><i class="fas fa-check-circle"></i> Lifetime access to updates</li>
+                        <li><i class="fas fa-check-circle"></i> Commercial use license included</li>
+                    </ul>
+
+                    <div class="fd-price-block">
+                        <div>
+                            <div class="fd-price" id="detailPrice">₹0</div>
+                            <div class="fd-price-note" id="detailPriceNote">One-time payment</div>
+                        </div>
+                    </div>
+
+                    <button class="fd-primary-btn" id="detailPrimaryBtn">
+                        <i class="fas fa-lock"></i> <span id="detailPrimaryBtnText">Unlock Now</span>
+                    </button>
+
+                    <!-- Payment info notice (Razorpay) -->
+                    <div class="fd-payment-notice" id="fdPaymentNotice">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Payment Process:</strong><br>
+                        1. Click "Pay Now" to open the secure Razorpay checkout.<br>
+                        2. Complete your payment (UPI / Card / NetBanking).<br>
+                        3. We'll receive your payment confirmation and send the file to your email within 24 hours.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== MOBILE / PERFORMANCE DETECTION =====
+            const isMobile = window.matchMedia('(max-width: 768px)').matches
+                          || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             // ===== THEME TOGGLE =====
             const themeToggle = document.getElementById('themeToggle');
@@ -1358,7 +2412,6 @@
             const moonOption = document.getElementById('moonOption');
             const body = document.body;
 
-            // Check for saved theme preference
             const savedTheme = localStorage.getItem('clipihub-theme');
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
@@ -1425,7 +2478,7 @@
                 document.getElementById('element').textContent = 'Video Editor';
             }
 
-            // SHOWREEL with 4 videos
+            // SHOWREEL
             const playlist = [
                 { title: "Apple Style UI Editing", src: "EditorIntroduction.mp4" },
                 { title: "SaaS Apple UI Animation", src: "BeenOn.mp4" },
@@ -1453,14 +2506,16 @@
                 }
             }
             if (prevBtn && nextBtn && videoPlayer) {
-                videoPlayer.src = playlist[0].src;
-                videoPlayer.load();
+                if (!isMobile) {
+                    videoPlayer.src = playlist[0].src;
+                    videoPlayer.load();
+                }
                 if (titleElement) titleElement.textContent = playlist[0].title;
                 prevBtn.addEventListener('click', function() { loadVideo(currentIndex - 1); });
                 nextBtn.addEventListener('click', function() { loadVideo(currentIndex + 1); });
             }
 
-            // CONTACT FORM (EMAILJS)
+            // CONTACT FORM (EMAILJS) — Contact Us template
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
@@ -1488,35 +2543,376 @@
                 });
             }
 
-            // PARALLAX
-            const parallaxBg = document.getElementById('parallaxBg');
-            const layers = parallaxBg.querySelectorAll('.layer');
-            if (parallaxBg) {
-                let lastScrollY = 0;
-                let ticking = false;
-                window.addEventListener('scroll', function() {
-                    lastScrollY = window.scrollY;
-                    if (!ticking) {
-                        window.requestAnimationFrame(function() {
-                            const scrollY = lastScrollY;
-                            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                            const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
-                            const translateY = progress * -30;
-                            parallaxBg.style.transform = 'translateY(' + translateY + 'px)';
-                            layers.forEach(function(layer, index) {
-                                const speed = 0.2 + (index * 0.12);
-                                const moveY = progress * (40 + index * 15) * speed;
-                                const scale = 1 + progress * 0.04;
-                                layer.style.transform = 'translateY(' + moveY + 'px) scale(' + scale + ')';
+            // PARALLAX — DESKTOP ONLY
+            if (!isMobile && !prefersReducedMotion) {
+                const parallaxBg = document.getElementById('parallaxBg');
+                if (parallaxBg) {
+                    const layers = parallaxBg.querySelectorAll('.layer');
+                    let lastScrollY = 0;
+                    let ticking = false;
+                    window.addEventListener('scroll', function() {
+                        lastScrollY = window.scrollY;
+                        if (!ticking) {
+                            window.requestAnimationFrame(function() {
+                                const scrollY = lastScrollY;
+                                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                                const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+                                const translateY = progress * -30;
+                                parallaxBg.style.transform = 'translateY(' + translateY + 'px)';
+                                layers.forEach(function(layer, index) {
+                                    const speed = 0.2 + (index * 0.12);
+                                    const moveY = progress * (40 + index * 15) * speed;
+                                    const scale = 1 + progress * 0.04;
+                                    layer.style.transform = 'translateY(' + moveY + 'px) scale(' + scale + ')';
+                                });
+                                ticking = false;
                             });
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
-                }, { passive: true });
+                            ticking = true;
+                        }
+                    }, { passive: true });
+                }
             }
+
+            // ===== CURSOR SQUISHY FOLLOW — DESKTOP ONLY =====
+            if (!isMobile && !prefersReducedMotion) {
+                (function() {
+                    const blobs = [
+                        { el: document.getElementById('blob1'), x: 0, y: 0, ease: 0.08, offsetX: 0, offsetY: 0 },
+                        { el: document.getElementById('blob2'), x: 0, y: 0, ease: 0.05, offsetX: 50, offsetY: -35 },
+                        { el: document.getElementById('blob3'), x: 0, y: 0, ease: 0.12, offsetX: -35, offsetY: 30 }
+                    ];
+
+                    let mouseX = window.innerWidth / 2;
+                    let mouseY = window.innerHeight / 2;
+                    let prevMouseX = mouseX;
+                    let prevMouseY = mouseY;
+
+                    window.addEventListener('mousemove', function(e) {
+                        mouseX = e.clientX;
+                        mouseY = e.clientY;
+                    });
+
+                    window.addEventListener('mousedown', function(e) {
+                        blobs.forEach(function(b) {
+                            if (!b.el) return;
+                            b.el.classList.remove('squish');
+                            b.el.classList.remove('turbulent');
+                            void b.el.offsetWidth;
+                            b.el.classList.add('squish');
+                            setTimeout(function() { b.el.classList.add('turbulent'); }, 40);
+                            setTimeout(function() {
+                                b.el.classList.remove('turbulent');
+                            }, 600);
+                        });
+
+                        spawnRipple(e.clientX, e.clientY);
+                        spawnRipple(e.clientX, e.clientY, true);
+                        triggerTurbulence(e.clientX, e.clientY);
+                    });
+
+                    function spawnRipple(x, y, isRing2) {
+                        const size = isRing2 ? 260 : 180;
+                        const ripple = document.createElement('div');
+                        ripple.className = 'click-ripple' + (isRing2 ? ' ring2' : '');
+                        ripple.style.width = size + 'px';
+                        ripple.style.height = size + 'px';
+                        ripple.style.left = x + 'px';
+                        ripple.style.top = y + 'px';
+                        document.body.appendChild(ripple);
+                        setTimeout(function() {
+                            if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                        }, 1200);
+                    }
+
+                    const turbulenceLayer = document.getElementById('turbulenceLayer');
+                    function triggerTurbulence(x, y) {
+                        if (!turbulenceLayer) return;
+                        const px = (x / window.innerWidth) * 100;
+                        const py = (y / window.innerHeight) * 100;
+                        turbulenceLayer.style.setProperty('--tx', px + '%');
+                        turbulenceLayer.style.setProperty('--ty', py + '%');
+                        turbulenceLayer.classList.remove('active');
+                        void turbulenceLayer.offsetWidth;
+                        turbulenceLayer.classList.add('active');
+                        setTimeout(function() {
+                            turbulenceLayer.classList.remove('active');
+                        }, 900);
+                    }
+
+                    function animate() {
+                        const dx = mouseX - prevMouseX;
+                        const dy = mouseY - prevMouseY;
+                        const speed = Math.min(Math.sqrt(dx * dx + dy * dy) / 55, 1);
+                        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+                        blobs.forEach(function(b) {
+                            if (!b.el) return;
+                            const targetX = mouseX + b.offsetX;
+                            const targetY = mouseY + b.offsetY;
+
+                            b.x += (targetX - b.x) * b.ease;
+                            b.y += (targetY - b.y) * b.ease;
+
+                            const stretchX = 1 + speed * 0.18;
+                            const stretchY = 1 - speed * 0.12;
+
+                            b.el.style.transform =
+                                'translate(-50%, -50%) ' +
+                                'translate(' + b.x + 'px, ' + b.y + 'px) ' +
+                                'rotate(' + angle + 'deg) ' +
+                                'scale(' + stretchX + ', ' + stretchY + ')';
+                        });
+
+                        prevMouseX += (mouseX - prevMouseX) * 0.12;
+                        prevMouseY += (mouseY - prevMouseY) * 0.12;
+
+                        requestAnimationFrame(animate);
+                    }
+                    animate();
+                })();
+            }
+
+            // ============================================================
+            // ===== PROJECT FILES + DETAIL PAGE (RAZORPAY PAYMENT LINKS) =====
+            // ============================================================
+
+            console.log("🔥 CODE VERSION 2 LOADED 🔥");
+            const projectFiles = [
+                {
+                    title: "Apple Style UI Edit",
+                    desc: "Apple-inspired motion graphics built in After Effects",
+                    icon: "fas fa-layer-group",
+                    cover: "apleuistyle.png",
+                    previewVideo: "CartFinishingTouch.mp4",
+                    size: "9 MB",
+                    format: "AEP + Assets",
+                    type: "free",
+                    price: 0,
+                    driveLink: "https://drive.google.com/drive/folders/1-M61peUdbMGXfG09oLUcPviAhHD648Tp?usp=share_link"
+                    ,
+                },
+                {
+                    title: "Cinematic Fast Pace Edit",
+                    desc: "Premium fast-paced edit project",
+                    icon: "fas fa-palette",
+                    cover: "pace.png",
+                    previewVideo: "Irl1.mp4",
+                    size: "5 MB",
+                    format: "AEP only",
+                    type: "Paid",
+                    price: 799,
+                    driveLink: "https://drive.google.com/file/d/1c15tPeGcfejgdKvQgoSXMx_Yz0AfpH4N/view?usp=sharing",
+                    razorpayLink: "https://rzp.io/rzp/h8t2YdBE"
+                },
+                {
+                    title: "Cosmos Motion Graphics",
+                    desc: "Minimalistic MoGraph",
+                    icon: "fas fa-film",
+                    cover: "cosmos.png",
+                    previewVideo: "Cosmos.mp4",
+                    size: "7 MB",
+                    format: "AEP with assets",
+                    type: "paid",
+                    price: 999,
+                    driveLink: "https://drive.google.com/drive/folders/1jc_C9IskmVzVESd-my7QT8jYxTtbmcG3?usp=sharing",
+                    razorpayLink: "https://rzp.io/rzp/9bs0GuJ"
+                },
+                {
+                    title: "Sfx Pack",
+                    desc: "My personal SFX Pack",
+                    icon: "fas fa-music",
+                    cover: "sfxpack.jpg",
+                    previewVideo: "",
+                    size: "100 MB",
+                    format: "WAV & MOV",
+                    type: "paid",
+                    price: 499,
+                    driveLink: "https://drive.google.com/drive/folders/18nmB6MPCpDZng0FaU3T9llzj1rIAY7ge?usp=sharing",
+                    razorpayLink: "https://rzp.io/rzp/LsW5lys"
+                },
+                {
+                    title: "Video Editing - speed ramp",
+                    desc: "Car montage with speed ramp.",
+                    icon: "fas fa-mobile-alt",
+                    cover: "speedramp.png",
+                    previewVideo: "SpeedRampCar_1.mp4",
+                    size: "32 MB",
+                    format: "AEP with clips",
+                    type: "paid",
+                    price: 799,
+                    driveLink: "https://drive.google.com/drive/folders/1KtTWgnKXD9SfvkT9M_KujRwuRmetAFQG?usp=share_link",
+                    razorpayLink: "https://rzp.io/rzp/3QPXJL9"
+                },
+                {
+                    title: "3D Mockups",
+                    desc: "iPhone, Macbook etc as 3d Models",
+                    icon: "fas fa-font",
+                    cover: "mockup.png",
+                    previewVideo: "",
+                    format: "glb",
+                    type: "paid",
+                    price: 999,
+                    driveLink: "https://drive.google.com/drive/folders/1mJKbsS9e50tpwx791WimQ38D5MccK3KG?usp=sharing",
+                    razorpayLink: "https://rzp.io/rzp/CUTUEgHH"
+                }
+            ];
+
+            // ---- Render cards ----
+            const filesGrid = document.getElementById('filesGrid');
+            if (filesGrid) {
+                projectFiles.forEach(function(file, idx) {
+                    const card = document.createElement('div');
+                    card.className = 'file-card';
+                    const isPaid = file.type === 'paid';
+                    card.setAttribute('data-index', idx);
+                    card.innerHTML =
+                        '<div class="file-cover">' +
+                            '<img src="' + file.cover + '" alt="' + file.title + '" loading="lazy" />' +
+                            '<div class="cover-icon"><i class="' + file.icon + '"></i></div>' +
+                            '<div class="cover-tag ' + (isPaid ? 'paid' : 'free') + '">' + (isPaid ? 'Premium' : 'Free') + '</div>' +
+                        '</div>' +
+                        '<div class="file-body">' +
+                            '<h4>' + file.title + '</h4>' +
+                            '<p>' + file.desc + '</p>' +
+                            '<div class="file-meta">' +
+                                '<span><i class="fas fa-hdd"></i> ' + file.size + '</span>' +
+                                '<span><i class="fas fa-file"></i> ' + file.format + '</span>' +
+                            '</div>' +
+                            '<div class="file-footer">' +
+                                '<span class="file-price-badge ' + (isPaid ? 'paid' : 'free') + '">' +
+                                    (isPaid ? '₹' + file.price : 'Free') +
+                                '</span>' +
+                                '<button class="file-btn" type="button">View Details</button>' +
+                            '</div>' +
+                        '</div>';
+                    filesGrid.appendChild(card);
+                });
+
+                filesGrid.addEventListener('click', function(e) {
+                    const card = e.target.closest('.file-card');
+                    if (!card) return;
+                    const idx = parseInt(card.getAttribute('data-index'), 10);
+                    const file = projectFiles[idx];
+                    if (!file) return;
+                    openFileDetail(file);
+                });
+            }
+
+            // ---- Detail page logic ----
+            const fileDetailPage = document.getElementById('fileDetailPage');
+            const detailBackBtn = document.getElementById('detailBackBtn');
+            const detailCover = document.getElementById('detailCover');
+            const detailIcon = document.getElementById('detailIcon');
+            const detailTag = document.getElementById('detailTag');
+            const detailTypeLabel = document.getElementById('detailTypeLabel');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailDesc = document.getElementById('detailDesc');
+            const detailSize = document.getElementById('detailSize');
+            const detailFormat = document.getElementById('detailFormat');
+            const detailPrice = document.getElementById('detailPrice');
+            const detailPriceNote = document.getElementById('detailPriceNote');
+            const detailPrimaryBtn = document.getElementById('detailPrimaryBtn');
+            const detailPrimaryBtnText = document.getElementById('detailPrimaryBtnText');
+            const fdPaymentNotice = document.getElementById('fdPaymentNotice');
+            const fdPreviewVideo = document.getElementById('fdPreviewVideo');
+            const detailPreviewPlayer = document.getElementById('detailPreviewPlayer');
+            const detailPreviewSource = document.getElementById('detailPreviewSource');
+
+            let activeFile = null;
+
+            function openFileDetail(file) {
+                activeFile = file;
+                const isPaid = file.type === 'free';
+
+                detailCover.src = file.cover;
+                detailCover.alt = file.title;
+                detailIcon.className = file.icon;
+                detailTitle.textContent = file.title;
+                detailDesc.textContent = file.desc;
+                detailSize.textContent = file.size;
+                detailFormat.textContent = file.format;
+
+                // ----- Preview video -----
+                if (file.previewVideo && file.previewVideo.trim() !== "") {
+                    detailPreviewSource.src = file.previewVideo;
+                    detailPreviewPlayer.load();
+                    fdPreviewVideo.classList.remove('hidden');
+                } else {
+                    try { detailPreviewPlayer.pause(); } catch (e) {}
+                    detailPreviewSource.src = "";
+                    detailPreviewPlayer.removeAttribute('src');
+                    detailPreviewPlayer.load();
+                    fdPreviewVideo.classList.add('hidden');
+                }
+
+                if (isPaid) {
+                    detailTag.textContent = 'Premium';
+                    detailTag.className = 'fd-cover-tag paid';
+                    detailTypeLabel.textContent = 'Premium Resource';
+                    detailPrice.textContent = '₹' + file.price;
+                    detailPrice.className = 'fd-price';
+                    detailPriceNote.textContent = 'One-time payment';
+                    detailPrimaryBtn.className = 'fd-primary-btn';
+                    detailPrimaryBtnText.textContent = 'Pay ₹' + file.price + ' via Razorpay';
+                    detailPrimaryBtn.querySelector('i').className = 'fas fa-lock';
+                    fdPaymentNotice.classList.add('active');
+                } else {
+                    detailTag.textContent = 'Free';
+                    detailTag.className = 'fd-cover-tag free';
+                    detailTypeLabel.textContent = 'Free Resource';
+                    detailPrice.textContent = 'Free';
+                    detailPrice.className = 'fd-price free';
+                    detailPriceNote.textContent = 'No payment required';
+                    detailPrimaryBtn.className = 'fd-primary-btn free';
+                    detailPrimaryBtnText.textContent = 'Download Now';
+                    detailPrimaryBtn.querySelector('i').className = 'fas fa-download';
+                    fdPaymentNotice.classList.remove('active');
+                }
+
+                fileDetailPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                fileDetailPage.scrollTop = 0;
+            }
+
+            function closeFileDetail() {
+                try { detailPreviewPlayer.pause(); } catch (e) {}
+                fileDetailPage.classList.remove('active');
+                document.body.style.overflow = '';
+                activeFile = null;
+            }
+
+            detailBackBtn.addEventListener('click', closeFileDetail);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && fileDetailPage.classList.contains('active')) {
+                    closeFileDetail();
+                }
+            });
+
+            // ===== PRIMARY BUTTON — Razorpay for paid, Drive for free =====
+            detailPrimaryBtn.addEventListener('click', function() {
+                if (!activeFile) return;
+
+                if (activeFile.type === 'free') {
+                    // Free file → direct download
+                    window.open(activeFile.driveLink, '_blank', 'noopener,noreferrer');
+                } else {
+                    // Paid file → Razorpay Payment Link
+                    if (!activeFile.razorpayLink || activeFile.razorpayLink.trim() === '') {
+                        alert('⚠️ Payment link not set for this file. Please contact clipihub.com@gmail.com');
+                        return;
+                    }
+                    // Open Razorpay checkout in new tab
+                    window.open(activeFile.razorpayLink, '_blank', 'noopener,noreferrer');
+
+                    // Show info notice after opening
+                    setTimeout(function() {
+                        alert('✅ Razorpay checkout opened in a new tab.\n\n1. Complete the payment (UPI / Card / NetBanking).\n2. We will receive a payment confirmation.\n3. The file will be emailed to you within 24 hours.\n\nAny questions? Email clipihub.com@gmail.com');
+                    }, 600);
+                }
+            });
+
         });
     </script>
 </body>
 </html>
-```
